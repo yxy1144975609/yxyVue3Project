@@ -53,6 +53,12 @@ export default {
       age: 18,
     }
 
+    // interface 接口
+    interface Person {
+      name: string
+      age: number
+    }
+
     return {
       name,
       unionType,
