@@ -8,11 +8,16 @@
 <script lang="ts">
 export default {
   setup() {
+    // TypeScript 基础类型
     let name: string = 'Alice'
     let age: number = 18
     let isActive: boolean = true
     let nothing: null = null
     let notDefined: undefined = undefined
+
+    // 复杂类型
+
+    //
 
     return {
       name,
