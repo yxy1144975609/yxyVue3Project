@@ -3,6 +3,8 @@
     <h1>TypeScript 学习</h1>
     <hr />
     <h3>1. TypeScript 基础类型</h3>
+
+    <h3>{{ employee }}</h3>
   </div>
 </template>
 <script lang="ts">
@@ -26,6 +28,10 @@ export default {
     let tuple: [string, number] = ['Alice', 18]
     let obj: { name: string; age: number } = { name: 'Alice', age: 18 }
     let basicRequest: RequestEnum = RequestEnum.GIT
+
+    basicRequest = RequestEnum.POST
+    console.log('basicRequest', basicRequest)
+    console.log('RequestEnum', RequestEnum.GIT, RequestEnum.POST)
 
     /**
      * 特殊类型
@@ -58,6 +64,16 @@ export default {
       name: string
       age: number
     }
+    // 接口可以继承
+    interface Student extends Person {
+      grade: number
+    }
+    const xiaoming: Student = {
+      name: 'Alice',
+      age: 18,
+      grade: 3,
+    }
+    // 接口可选属性
 
     return {
       name,
