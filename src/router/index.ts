@@ -25,7 +25,7 @@ const router = createRouter({
     {
       path: '/typeScript',
       name: 'typeScript',
-      component: () => import('../views/TypeScript.vue'),
+      component: () => import('../views/TypeScript/TypeScript1.vue'),
     },
   ],
 })
