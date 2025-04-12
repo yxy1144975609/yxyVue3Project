@@ -3,8 +3,6 @@
     <h1>TypeScript 学习</h1>
     <hr />
     <h3>1. TypeScript 基础类型</h3>
-
-    <h3>{{ employee }}</h3>
   </div>
 </template>
 <script lang="ts">
@@ -14,6 +12,7 @@ export enum RequestEnum {
   PUT = 'PUT',
   DELETE = 'DELETE',
 }
+
 export default {
   setup() {
     // TypeScript 基础类型
@@ -40,6 +39,8 @@ export default {
      * void: 表示没有返回值的函数类型
      * never: 表示永远不会有返回值的函数类型，通常用于抛出异常或无限循环的函数
      */
+
+    type Answer = 'yes' | 'no';
 
     // 联合类型
 
