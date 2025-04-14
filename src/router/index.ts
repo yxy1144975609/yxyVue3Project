@@ -27,6 +27,16 @@ const router = createRouter({
       name: 'typeScript',
       component: () => import('../views/TypeScript/TypeScript1.vue'),
     },
+    {
+      path: '/setupDemo1',
+      name: 'setupDemo1',
+      component: () => import('../views/SetupDemo/SetupDemo1.vue'),
+    },
+    {
+      path: '/setupDemo2',
+      name: 'setupDemo2',
+      component: () => import('../views/SetupDemo/SetupDemo2.vue'),
+    },
   ],
 })
 
