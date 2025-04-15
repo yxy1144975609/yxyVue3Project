@@ -1,6 +1,7 @@
 <template>
     <div>
-        <div>script setup 语法</div>
+        <div>script setup 语法 {{ ifDisabled }} {{ isDelivery }}</div>
+        <h1>表单</h1>
         <el-form :model="form" label-width="auto" style="max-width: 600px">
             <el-form-item label="Activity name">
                 <el-input v-model="form.name" />
@@ -53,20 +54,68 @@
             <el-form-item>
                 <el-button type="primary" @click="onSubmit">Create</el-button>
                 <el-button>Cancel</el-button>
+                <el-button @click="oneEdit">isEdit</el-button>
             </el-form-item>
         </el-form>
+
+        <h1>表格</h1>
+        <el-table :data="tableData" style="width: 100%">
+            <el-table-column fixed prop="date" label="Date" width="150" />
+            <el-table-column prop="name" label="Name" width="120" />
+            <el-table-column prop="state" label="State" width="120" />
+            <el-table-column prop="city" label="City" width="120" />
+            <el-table-column prop="address" label="Address" width="600" />
+            <el-table-column prop="zip" label="Zip" width="120" />
+            <el-table-column fixed="right" label="Operations" min-width="120">
+                <template #default>
+                    <el-button link type="primary" size="small" @click="handleClick">
+                        Detail
+                    </el-button>
+                    <el-button link type="primary" size="small">Edit</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { reactive } from 'vue'
+import { ref, unref, reactive, toRaw } from 'vue';
+import { onMounted, onUnmounted } from 'vue';
+import { computed, watch } from 'vue';
 
-const formItem = {
-    regionOptions: [
-        { label: 'Zone one', value: 'shanghai' },
-        { label: 'Zone two', value: 'beijing' },
-    ]
-}
+defineProps({
+    loading: {
+        type: Boolean,
+    },
+    width: {
+        type: String as PropType<string>,
+        default: '100%',
+    },
+    height: {
+        type: String as PropType<string>,
+        default: '280px',
+    },
+});
+
+// const emit = defineEmits(['success', 'register']);
+
+const ifDisabled = ref<boolean>(false);
+
+const formItem: FormSchema[] = [
+    {
+        field: 'region',
+        label: '地区',
+        component: 'Select',
+        colProps: { span: 8 },
+        componentProps: {
+            placeholder: '请选择是否政府采购',
+            options: [
+                { label: 'Zone one', value: 'shanghai' },
+                { label: 'Zone two', value: 'beijing' },
+            ],
+        },
+    },
+]
 
 // do not use same name with ref
 const form = reactive({
@@ -80,8 +129,70 @@ const form = reactive({
     desc: '',
 })
 
+const tableData = [
+    {
+        date: '2016-05-03',
+        name: 'Tom',
+        state: 'California',
+        city: 'Los Angeles',
+        address: 'No. 189, Grove St, Los Angeles',
+        zip: 'CA 90036',
+        tag: 'Home',
+    },
+]
+
+// 1.生命周期
+onMounted(() => {
+    console.log("this is unMounted");
+})
+
+onUnmounted(() => {
+    console.log("this is onUnmounted");
+});
+
+// 2.计算属性
+const isDelivery = computed(() => {
+    return form.delivery ? 'Yes' : 'No'
+});
+
+const zhResources = computed(() => {
+    return function fun(value: unknown) {
+        switch (value) {
+            case 'Sponsor':
+                return '赞助商';
+                break;
+            case 'Venue':
+                return '会场';
+                break;
+            default:
+                break;
+        }
+    };
+});
+
+// 3.监听
+// watch(
+//     () => props.year,
+//     (newVal, oldVal) => {
+//         init();
+//     },
+// );
+
+const oneEdit = () => {
+    ifDisabled.value = !unref(ifDisabled)
+}
+
 const onSubmit = () => {
-    console.log('submit!')
+    console.log('submit!', form)
+}
+const onReset = () => {
+    console.log('onReset!')
+}
+
+
+
+const handleClick = () => {
+    console.log('click')
 }
 </script>
 
