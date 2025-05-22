@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import { routerList } from './router/index'
 </script>
 
 <template>
@@ -11,12 +12,9 @@ import HelloWorld from './components/HelloWorld.vue'
       <HelloWorld msg="You did it!" />
 
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/scss">Scss</RouterLink>
-        <RouterLink to="/typeScript">TypeScript</RouterLink>
-        <RouterLink to="/setupDemo1">SetupDemo1</RouterLink>
-        <RouterLink to="/setupDemo2">SetupDemo2</RouterLink>
+        <RouterLink v-for="(item, index) in routerList" :key="index" :to="item.path">{{ item.name }}</RouterLink>
+        <!-- <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/about">About</RouterLink>-->
       </nav>
     </div>
   </header>
