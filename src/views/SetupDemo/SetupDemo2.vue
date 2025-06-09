@@ -51,9 +51,9 @@
         <el-input v-model="form.desc" type="textarea" />
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">Create</el-button>
-        <el-button>Cancel</el-button>
-        <el-button @click="oneEdit">isEdit</el-button>
+        <el-button type="primary" @click="handleSubmit">Create</el-button>
+        <el-button @click="handleCancel">Cancel</el-button>
+        <el-button @click="handleDisabled">isEdit?</el-button>
       </el-form-item>
     </el-form>
 
@@ -67,7 +67,7 @@
       <el-table-column prop="zip" label="Zip" width="120" />
       <el-table-column fixed="right" label="Operations" min-width="120">
         <template #default>
-          <el-button link type="primary" size="small" @click="handleClick"> Detail </el-button>
+          <el-button link type="primary" size="small" @click="handleEdit"> Detail </el-button>
           <el-button link type="primary" size="small">Edit</el-button>
         </template>
       </el-table-column>
@@ -81,31 +81,39 @@ import { onMounted, onUnmounted } from 'vue'
 import { computed, watch } from 'vue'
 import { PropType } from 'vue'
 
-defineProps({
-  loading: {
-    type: Boolean,
-  },
-  width: {
-    type: String as PropType<string>,
-    default: '100%',
-  },
-  height: {
-    type: String as PropType<string>,
-    default: '280px',
-  },
-})
+// defineProps({
+//   loading: {
+//     type: Boolean,
+//   },
+//   width: {
+//     type: String as PropType<string>,
+//     default: '100%',
+//   },
+//   height: {
+//     type: String as PropType<string>,
+//     default: '280px',
+//   },
+// })
 
 // const emit = defineEmits(['success', 'register']);
 
+defineProps({
+  year: {
+    type: Number,
+    default: 2023,
+  },
+})
+defineEmits(['success', 'register'])
+
 const ifDisabled = ref<boolean>(false)
 
-for (const key in object) {
-  if (Object.prototype.hasOwnProperty.call(object, key)) {
-    const element = object[key]
-  }
-}
-for (const element of object) {
-}
+// for (const key in object) {
+//   if (Object.prototype.hasOwnProperty.call(object, key)) {
+//     const element = object[key]
+//   }
+// }
+// for (const element of object) {
+// }
 
 interface FormSchema {
   field: string
@@ -193,19 +201,34 @@ const zhResources = computed(() => {
 //     },
 // );
 
+/**
+ * 这也没学清楚，那也没学清楚，只学了个demo 就当自己会了！
+ */
+
 const oneEdit = () => {
   ifDisabled.value = !unref(ifDisabled)
 }
 
-const onSubmit = () => {
-  console.log('submit!', form)
-}
-const onReset = () => {
-  console.log('onReset!')
+// form methods
+const handleSubmit = () => {
+  console.log('handleSubmit!', form, form.name)
 }
 
-const handleClick = () => {
-  console.log('click')
+const handleCancel = () => {
+  console.log('handleCancel!')
+}
+
+const handleDisabled = () => {
+  console.log('handleDisabled!')
+}
+
+//  table methods
+const handleEdit = () => {
+  console.log('handleEdit!')
+}
+
+const handleDelete = () => {
+  console.log('handleDelete!')
 }
 </script>
 

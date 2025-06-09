@@ -31,6 +31,12 @@ interface ReviewItem {
 export default defineComponent({
   name: 'setupDemo1',
   components: {},
+  props: {
+    // foo: {
+    //   type: Object as PropType<ReviewItem>,
+    // },
+  },
+  emits: ['success', 'register'],
   setup(props) {
     // 1. 基础类型（自动推断）
     let count = ref(0) // 自动推断为 Ref<number>
